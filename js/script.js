@@ -12,7 +12,7 @@ const cardsArray = [
 
     {
         name: 'pikachu',
-        img: 'img/ditto.gif',
+        img: 'img/pikachu.gif',
     },
 
     {
@@ -27,7 +27,7 @@ const cardsArray = [
 
     {
         name: 'jigglypuff',
-        img: 'img/jigglypuff',
+        img: 'img/jigglypuff.gif',
     },
 
     {
@@ -46,8 +46,8 @@ const cardsArray = [
     },
 
     {   
-        name: 'vulpix',
-        img: 'img/vulpix.gif',
+        name: 'ditto',
+        img: 'img/ditto.gif',
     },
 
     {
@@ -57,6 +57,34 @@ const cardsArray = [
 
     {
         name: 'charmander',
-        img: 'charmander.gif'
+        img: 'img/charmander.gif'
     },
 ]
+
+// Criação de elementos HTML
+
+const jogo = document.getElementById('jogo')
+const grid = document.createElement('section')
+grid.setAttribute('class', 'grid')
+
+jogo.appendChild(grid)
+
+// Inserção de itens do array e criação dos cards duplos 
+
+const jogoGrid = cardsArray.concat(cardsArray)
+jogoGrid.sort(() => 0.5 - Math.random()) 
+
+jogoGrid.forEach (item => {
+    const card = document.createElement('div')
+    card.classList.add('card')
+
+    card.dataset.name = item.name
+    card.style.backgroundImage = `url(${item.img})`
+
+    grid.appendChild(card)
+}) 
+
+
+
+
+
