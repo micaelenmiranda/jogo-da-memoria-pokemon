@@ -25,3 +25,11 @@ body {
     background-position: center center;
 }
 
+.selected {
+    border: 5px solid black;
+}
+
+.match {
+    border: 5px solid red;
+    background-image: none !important; 
+}

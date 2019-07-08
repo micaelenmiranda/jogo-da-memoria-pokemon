@@ -45,7 +45,7 @@ const cardsArray = [
         img: 'img/meowth.gif',
     },
 
-    {   
+    {
         name: 'ditto',
         img: 'img/ditto.gif',
     },
@@ -61,7 +61,19 @@ const cardsArray = [
     },
 ]
 
-// Criação de elementos HTML
+// Duplicação do array
+
+const jogoGrid = cardsArray.concat(cardsArray)
+jogoGrid.sort(() => 0.5 - Math.random())
+
+// Variáveis
+
+let primeiroPalpite = ''
+let segundoPalpite = ''
+let previousTarget = null
+let cont = 0
+
+// Criação de elementos HTML e inserção de itens do array
 
 const jogo = document.getElementById('jogo')
 const grid = document.createElement('section')
@@ -69,12 +81,7 @@ grid.setAttribute('class', 'grid')
 
 jogo.appendChild(grid)
 
-// Inserção de itens do array e criação dos cards duplos 
-
-const jogoGrid = cardsArray.concat(cardsArray)
-jogoGrid.sort(() => 0.5 - Math.random()) 
-
-jogoGrid.forEach (item => {
+jogoGrid.forEach(item => {
     const card = document.createElement('div')
     card.classList.add('card')
 
@@ -82,9 +89,40 @@ jogoGrid.forEach (item => {
     card.style.backgroundImage = `url(${item.img})`
 
     grid.appendChild(card)
+})
+
+// Escolha de somente dois cards e condição caso sejam iguais
+
+grid.addEventListener('click', function(event) {
+
+  let clicar = event.target 
+
+  if(clicar.nodeName === 'SECTION' || clicar === previousTarget) { return }  
+  if(cont < 2) {
+      cont++
+      
+      if (cont === 1) {
+        primeiroPalpite = clicar.dataset.name
+        clicar.classList.add('selected')
+      } else {
+          segundoPalpite = clicar.dataset.name
+          clicar.classList.add('selected')
+      }
+
+      if(primeiroPalpite !== '' && segundoPalpite !== '') {
+          if(primeiroPalpite === segundoPalpite) {
+              match()
+          }
+      }
+      previousTarget = clicar
+  }
 }) 
 
+// Consequência da combinação de dois cards
 
-
-
-
+const match = () => {
+    const selected = document.querySelectorAll('.selected')
+    selected.forEach(card => {
+        card.classList.add('match')
+    })
+}
