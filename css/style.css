@@ -30,6 +30,5 @@ body {
 }
 
 .match {
-    border: 5px solid red;
     background-image: none !important; 
 }

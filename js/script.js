@@ -72,6 +72,8 @@ let primeiroPalpite = ''
 let segundoPalpite = ''
 let previousTarget = null
 let cont = 0
+let delay = 1200
+
 
 // Criação de elementos HTML e inserção de itens do array
 
@@ -90,6 +92,27 @@ jogoGrid.forEach(item => {
 
     grid.appendChild(card)
 })
+
+// Funções de consequência da combinação de dois cards
+
+const match = () => {
+    const selected = document.querySelectorAll('.selected')
+    selected.forEach(card => {
+        card.classList.add('match')
+    })
+}
+
+const resetPalpites = () => {
+    primeiroPalpite = ''
+    segundoPalpite = ''
+    cont = 0
+    previousTarget = null
+
+    var selected = document.querySelectorAll('.selected')
+    selected.forEach(card => {
+        card.classList.remove('selected')
+    })
+}
 
 // Escolha de somente dois cards e condição caso sejam iguais
 
@@ -111,18 +134,15 @@ grid.addEventListener('click', function(event) {
 
       if(primeiroPalpite !== '' && segundoPalpite !== '') {
           if(primeiroPalpite === segundoPalpite) {
-              match()
+             setTimeout(match, delay)
+             setTimeout(resetPalpites, delay)
+          } else {
+             setTimeout(resetPalpites, delay)
           }
       }
       previousTarget = clicar
   }
 }) 
 
-// Consequência da combinação de dois cards
 
-const match = () => {
-    const selected = document.querySelectorAll('.selected')
-    selected.forEach(card => {
-        card.classList.add('match')
-    })
-}
+
