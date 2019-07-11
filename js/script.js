@@ -74,7 +74,6 @@ let previousTarget = null
 let cont = 0
 let delay = 1200
 
-
 // Criação de elementos HTML e inserção de itens do array
 
 const jogo = document.getElementById('jogo')
@@ -86,11 +85,18 @@ jogo.appendChild(grid)
 jogoGrid.forEach(item => {
     const card = document.createElement('div')
     card.classList.add('card')
+    card.dataset.name = item.name    
 
-    card.dataset.name = item.name
-    card.style.backgroundImage = `url(${item.img})`
+    const front = document.createElement('div')
+    front.classList.add('front')
+
+    const back = document.createElement('div')
+    back.classList.add('back')
+    back.style.backgroundImage = `url(${item.img})`
 
     grid.appendChild(card)
+    card.appendChild(front)
+    card.appendChild(back)
 })
 
 // Funções de consequência da combinação de dois cards
@@ -120,16 +126,18 @@ grid.addEventListener('click', function(event) {
 
   let clicar = event.target 
 
-  if(clicar.nodeName === 'SECTION' || clicar === previousTarget) { return }  
+  if(clicar.nodeName === 'SECTION' || clicar === previousTarget || clicar.parentNode.classList.contains('selected')) { return }  
   if(cont < 2) {
       cont++
       
       if (cont === 1) {
-        primeiroPalpite = clicar.dataset.name
-        clicar.classList.add('selected')
+        primeiroPalpite = clicar.parentNode.dataset.name
+        console.log(primeiroPalpite)
+        clicar.parentNode.classList.add('selected')
       } else {
-          segundoPalpite = clicar.dataset.name
-          clicar.classList.add('selected')
+          segundoPalpite = clicar.parentNode.dataset.name
+          console.log(segundoPalpite)
+          clicar.parentNode.classList.add('selected')
       }
 
       if(primeiroPalpite !== '' && segundoPalpite !== '') {
@@ -143,6 +151,3 @@ grid.addEventListener('click', function(event) {
       previousTarget = clicar
   }
 }) 
-
-
-
