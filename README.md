@@ -1,2 +1,3 @@
 # jogo-da-memoria-pokemon
-Jogo da memória feito em html, css e javascript com cards dos personagens de pokémon
+Jogo da memória feito em html, css e javascript em que cada card é um gif de um personagem do anime Pokémon. As regras são as mesmas de um jogo da memória convencional, vira-se duas cartas por vez com o objetivo de encontrar uma igual a outra. A implementação desse jogo simples teve por objetivo praticar conhecimentos de Javascript, onde na maior parte me apoiei em artigos da desenvolvedora [Tania Rascia](taniarascia.com). Foram aplicados o uso e criação de **funções**, **lógica de programação**, **arrays** e a manipulação do **DOM**. 
+
